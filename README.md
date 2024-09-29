@@ -33,26 +33,33 @@ Grafana download page:
 https://grafana.com/grafana/download?platform=windows
 
 Since my system is Windows system, I’m going to download Windows Installer:
+
 ![Step 1 1 Image 1](https://github.com/user-attachments/assets/b8e46b1c-30e2-4050-9335-6f4ae8f7a387)
 
 I’m going to install Grafana under the path of C:\Program Files\GrafanaLabs\, which is the standard default path of the installer:
+
 ![Step 1 1 Image 2](https://github.com/user-attachments/assets/2a107c7d-13a5-45d9-836a-c13810f9b012)
 
 Once the Grafana is installed, go to localhost:3000 in the browser:
+
 ![Step 1 1 Image 3](https://github.com/user-attachments/assets/54fbf6ca-b44c-47c8-b295-702f7e44c333)
 
 Log in Grafana using the default username (admin) and password (admin), and change the password once using the default one to log in:
+
 ![Step 1 1 Image 4](https://github.com/user-attachments/assets/458da74f-d81f-4e0e-85a2-3f0046aa2f43)
 
 Now we have successfully installed and logged in to our Grafana and it’s ready to be used later:
+
 ![Step 1 1 Image 5](https://github.com/user-attachments/assets/5be96a83-3e05-4dcf-b39a-ced15a9bbb5e)
 
 # Step 2: Set up MySQL cluster with master and slaves
 ## 2.1 Create folders in MySQL directory for master and the 2 slaves
+
 ![Step 2 1 Image 1](https://github.com/user-attachments/assets/7615c2db-c7cb-49a0-b541-926ba0d8f7ff)
 
 ## 2.2 Create Servers
 Copy bin and share folders from your original MySQL instance into each of the new folders we just created
+
 ![Step 2 2 Image1](https://github.com/user-attachments/assets/13786ee5-677f-460b-b182-18b29e08b701)
 ![Stpe 2 2 Image2](https://github.com/user-attachments/assets/e2f917a2-3079-4800-913d-bcea8acde2b4)
 ![Stpe 2 2 Image3](https://github.com/user-attachments/assets/023adea6-3de1-44bc-b74c-373644dbd582)
@@ -63,9 +70,11 @@ In the directory of where your master bin is, run the following command in the c
 mysqld --initialize-insecure --console --datadir=C:\Program Files\MySQL\master\data
 ```
 If you encounter a permission issue like this, you will need to run the command line as an administrator.
+
 ![Step 2 3 Image1](https://github.com/user-attachments/assets/7c58c9da-5b16-4838-8b18-9bdf7be90e09)
 
 Remember to go to the directory where your sqld.exe file exists. In my case, the file is in C:\Program Files\MySQL\master\bin>:
+
 ![Step 2 3 Image2](https://github.com/user-attachments/assets/37ffb9f4-e69f-4836-b301-452cc565130b)
 
 Create the configuration file called my.ini and save it to the master bin folder:
@@ -79,6 +88,7 @@ mysqld --defaults-file="C:\Program Files\MySQL\master\bin\my.ini" --console
 ```
 
 If you encounter an error like this, saying the port might be in use by another application, you will need to stop the service first:
+
 ![Step 2 3 Image5](https://github.com/user-attachments/assets/0a28e7d3-ccc8-4ebf-adb7-99fb6d04e87f)
 
 Hit Windows key + R to open up the Run dialog:
@@ -96,12 +106,15 @@ mysqld --defaults-file="C:\Program Files\MySQL\master\bin\my.ini" --console
 ![Step 2 3 Image8](https://github.com/user-attachments/assets/f9c829e2-415b-4742-9081-0ab4ce75b98c)
 
 Open a new Command Line window to connect to the master server:
+
 ![Step 2 3 Image9](https://github.com/user-attachments/assets/5916c647-274c-4468-b3ab-7fca1c95cb27)
 
 Since I have MYSQL Workbench installed in my system, I can write the SQL queries by connecting to the master server on Workbench (you can use another different GUI if you like to, but this is not necessary, because you can even write SQL queries in the command line):
+
 ![Step 2 3 Image10](https://github.com/user-attachments/assets/d9f825ef-bb80-4d26-b851-2c8995172a9d)
 
 Now create a new user and grant access to it for replicating data later:
+
 ![Step 2 3 Image11](https://github.com/user-attachments/assets/49637df8-b95d-466e-b6c2-f06ab68d0670)
 
 ## 2.4 Now we need to configure the Slave Servers in the command line as well
@@ -177,6 +190,7 @@ CHANGE MASTER TO
     MASTER_LOG_POS=154;                   -- Use the 'Position' from master status
 START SLAVE;
 ```
+
 ![Step 2 4 Image9](https://github.com/user-attachments/assets/8f714ae4-a988-4ef4-8a8b-c99b72c401f2)
 
 ## 2.5 Replication Process Verification
