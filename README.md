@@ -21,9 +21,9 @@ Understand the underlying database concepts and mechanisms.
 ## Lessons Learned 
 -	Create a project folder to include all your project files in an appropriate directory, remember to make sure the directory is correct in your configuration files.
 -	When running your project Python script, it’s always recommended to create a separate Virtual Environment under your project folder.
--	When select the metrics to monitor your server performance, always select the ones that’s important to your organization. In my case, the most important metrics that I care the most are the CPG Usage, Data Read from the server, and the Lagging Times that we replicate data from Master server to slave1 and slave 2 server.
+-	When select the metrics to monitor your server performance, always select the ones that’s important to your organization. In my case, the most important metrics that I care the most are the CPU Usage, Data Read from the server, and the Lagging Times that we replicate data from Master server to slave1 and slave 2 server.
 -	For Continuous Development (CD) and Continuous Integration (CI) in real work cases, it’s better to use Docker to isolate our application can run in its own container, allowing for isolated testing and development without conflict. In my case, my system does not support Docker. 
-
+- For data privacy security concern, if we deploy the codes on cloud platform like AWS, we will need to be pretty careful about the password we use for the server. Try to set up a env file to include the password instead, and try to set up specific IAM rule to limit the access of the files we've deployed.
 
 # Step 1: Prepare Local Environment
 ## 1.1 Install Grafana locally
